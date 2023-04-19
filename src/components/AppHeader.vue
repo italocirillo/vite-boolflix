@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <h2>Header</h2>
+    <h1>Boolflix</h1>
 </template>
 
 <style lang="scss"></style>

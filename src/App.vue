@@ -17,18 +17,28 @@ export default {
 
   methods: {
     ottieniFilm() {
-
       const params = {
         api_key: "98f46d7d18a354762b374158a8da360e",
-        query: "Vita",
+        language: "it-IT"
       };
-
-      axios.get(this.store.apiUrl, {
-        params
-      }).then((resp) => {
-        console.log(resp.data);
-      })
-
+      if (this.store.statoRicerca) {
+        params.query = this.store.filmDaCercare;
+        axios.get(this.store.apiUrl, {
+          params
+        }).then((resp) => {
+          this.store.catalogoFilm = resp.data.results;
+          console.log(resp.data.results);
+        }).catch((error) => {
+          console.log(error);
+        }).finally(() => {
+          this.store.statoRicerca = false;
+        })
+      }
+    },
+    eseguiRicerca() {
+      this.store.statoRicerca = true;
+      this.ottieniFilm();
+      this.store.filmDaCercare = "";
     }
   }
 }
@@ -36,7 +46,7 @@ export default {
 </script>
 <template>
   <AppHeader />
-  <AppMain />
+  <AppMain @cerca="eseguiRicerca" />
 </template>
 
 <style lang="scss">
