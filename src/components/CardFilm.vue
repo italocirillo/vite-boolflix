@@ -16,11 +16,14 @@ export default {
 
 <template>
     <div class="card" style="width: 18rem;">
-        <img :src="'https://image.tmdb.org/t/p/w342' + film.poster_path" class="card-img-top"
-            :alt="film.title + ': immagine non trovata'">
+        <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
+            class="card-img-top" :alt="film.title + ': immagine non trovata'">
+        <h2 v-else>IMMAGINE NON DISPONIBILE</h2>
         <div class="card-body">
-            <h5 class="card-title">{{ film.title }}</h5>
-            <p class="card-text">{{ film.original_title }}</p>
+            <h5 v-if="film.title" class="card-title">{{ film.title }}</h5>
+            <h5 v-else class="card-title">{{ film.name }}</h5>
+            <p v-if="film.original_title" class="card-text">{{ film.original_title }}</p>
+            <p v-else>{{ film.original_name }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">

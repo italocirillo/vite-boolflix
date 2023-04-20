@@ -13,18 +13,25 @@ export default {
   },
 
   methods: {
-    ottieniFilm() {
+    ottieniFilm(ricercaCategoria) {
       this.store.loading = true;
       const params = {
         api_key: "98f46d7d18a354762b374158a8da360e",
         language: "it-IT"
       };
       params.query = this.store.filmDaCercare;
-      axios.get(this.store.apiUrl, {
+      // Chiamata axios
+      axios.get(this.store.apiUrl + ricercaCategoria, {
         params
       }).then((resp) => {
-        this.store.catalogoFilm = resp.data.results;
-        console.log(resp.data.results);
+        // Scelta tra movie e serie
+        if (ricercaCategoria === "movie") {
+          this.store.catalogoFilm = resp.data.results;
+          console.log(resp.data.results);
+        } else if (ricercaCategoria === "tv") {
+          this.store.catalogoSerie = resp.data.results;
+          console.log(resp.data.results);
+        }
       }).catch((error) => {
         console.log(error);
       }).finally(() => {
@@ -32,7 +39,8 @@ export default {
       })
     },
     eseguiRicerca() {
-      this.ottieniFilm();
+      this.ottieniFilm("movie");
+      this.ottieniFilm("tv");
       this.store.filmDaCercare = "";
     }
   }
