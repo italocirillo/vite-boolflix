@@ -29,7 +29,6 @@ export default {
         console.log(error);
       }).finally(() => {
         this.store.loading = false;
-        console.log(this.store.loading);
       })
     },
     eseguiRicerca() {
