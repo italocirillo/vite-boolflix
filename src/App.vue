@@ -11,12 +11,10 @@ export default {
       store
     }
   },
-  mounted() {
-    this.ottieniFilm();
-  },
 
   methods: {
     ottieniFilm() {
+      this.store.loading = true;
       const params = {
         api_key: "98f46d7d18a354762b374158a8da360e",
         language: "it-IT"
@@ -30,6 +28,8 @@ export default {
       }).catch((error) => {
         console.log(error);
       }).finally(() => {
+        this.store.loading = false;
+        console.log(this.store.loading);
       })
     },
     eseguiRicerca() {
