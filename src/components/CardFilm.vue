@@ -7,6 +7,14 @@ export default {
             countryList: ["am", "ar", "az", "bn", "be", "cact", "cs", "de", "el", "en", "es", "et", "fa", "fr", "bg", "ha", "hi", "hu", "hy", "it", "id", "ja", "jv", "km", "ko", "lv", "mr", "ms", "nl", "pl", "pt", "ro", "ru", "sw", "ta", "te", "th", "tr", "uk", "uz", "vi", "zh"]
         }
     },
+    computed: {
+        lingua() {
+            return this.film.original_language;
+        },
+        valutazione() {
+            return Math.ceil((this.film.vote_average / 2));
+        }
+    },
     props: {
         film: Object,
     },
@@ -15,7 +23,7 @@ export default {
 </script>
 
 <template>
-    <div class="card" style="width: 18rem;">
+    <div class="card">
         <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
             class="card-img-top" :alt="film.title + ': immagine non trovata'">
         <h2 v-else>IMMAGINE NON DISPONIBILE</h2>
@@ -27,20 +35,41 @@ export default {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <lang-flag v-if="this.countryList.includes(film.original_language)" :iso="film.original_language"
-                    :squared="false" :title=film.original_language />
-                <div v-else>{{ film.original_language }}</div>
+                <lang-flag v-if="this.countryList.includes(lingua)" :iso="lingua" :squared="false" :title=lingua />
+                <div v-else>{{ lingua }}</div>
             </li>
-            <li class=" list-group-item">{{ film.vote_average }}
+            <li class=" list-group-item valutazione">
+                <ul>
+                    <li v-for="n in 5">
+                        <i v-if="n <= valutazione" class="fa-solid fa-star"></i>
+                        <i v-else class="fa-regular fa-star"></i>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .card {
     height: 100%;
-    background-color: bisque;
+    background-color: rgb(96, 167, 167);
     color: black;
+
+    .valutazione {
+        ul {
+            padding: 0em;
+            width: 100%;
+            list-style: none;
+            display: flex;
+            justify-items: flex-start;
+            justify-content: space-between;
+
+            i {
+                color: rgb(218, 157, 3);
+            }
+        }
+    }
+
 }
 </style>
