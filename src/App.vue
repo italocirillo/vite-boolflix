@@ -21,22 +21,18 @@ export default {
         api_key: "98f46d7d18a354762b374158a8da360e",
         language: "it-IT"
       };
-      if (this.store.statoRicerca) {
-        params.query = this.store.filmDaCercare;
-        axios.get(this.store.apiUrl, {
-          params
-        }).then((resp) => {
-          this.store.catalogoFilm = resp.data.results;
-          console.log(resp.data.results);
-        }).catch((error) => {
-          console.log(error);
-        }).finally(() => {
-          this.store.statoRicerca = false;
-        })
-      }
+      params.query = this.store.filmDaCercare;
+      axios.get(this.store.apiUrl, {
+        params
+      }).then((resp) => {
+        this.store.catalogoFilm = resp.data.results;
+        console.log(resp.data.results);
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+      })
     },
     eseguiRicerca() {
-      this.store.statoRicerca = true;
       this.ottieniFilm();
       this.store.filmDaCercare = "";
     }

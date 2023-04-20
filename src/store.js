@@ -5,6 +5,5 @@ export const store = reactive({
     catalogoSerie: [],
     apiUrl: "https://api.themoviedb.org/3/search/movie",
     loading: false,
-    statoRicerca: false,
     filmDaCercare: "",
 });
