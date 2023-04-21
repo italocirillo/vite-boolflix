@@ -48,8 +48,8 @@ export default {
 
 </script>
 <template>
-  <AppHeader />
-  <AppMain @cerca="eseguiRicerca" />
+  <AppHeader @cerca="eseguiRicerca" />
+  <AppMain />
 </template>
 
 <style lang="scss">

@@ -1,7 +1,6 @@
 <script>
 import { store } from '../store';
 import CardFilm from './CardFilm.vue';
-import Ricerca from './Ricerca.vue';
 
 export default {
     name: "AppMain",
@@ -20,14 +19,11 @@ export default {
 
     },
     emits: ["cerca"],
-    components: { Ricerca, CardFilm },
+    components: { CardFilm },
 }
 </script>
 
 <template>
-    <!-- RICERCA -->
-    <Ricerca @cerca="$emit('cerca')" />
-
     <!-- LOADING -->
     <div v-if="this.store.loading" class="container">
         <p>Loading... <i class="fa-sharp fa-solid fa-spinner"></i></p>

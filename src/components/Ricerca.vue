@@ -13,7 +13,7 @@ export default {
 
 <template>
     <form @submit.prevent="">
-        <div class="w-50 input-group mb-3 ">
+        <div class=" input-group">
             <input type="search" class="form-control" placeholder="Ricerca film" aria-label="Ricerca"
                 aria-describedby="basic-addon1" v-model.trim="this.store.filmDaCercare">
             <button @click="$emit('cerca')" class="input-group-text" id="basic-addon1"><i
