@@ -15,10 +15,18 @@ export default {
             return Math.ceil((this.film.vote_average / 2));
         },
         titoloFilm() {
-            return this.film.title;
+            if (this.film.title) {
+                return this.film.title;
+            } else {
+                return this.film.name;
+            }
         },
         titoloOriginale() {
-            return this.film.original_title;
+            if (this.film.original_title) {
+                return this.film.original_title;
+            } else {
+                return this.film.original_name;
+            }
         }
     },
     props: {
@@ -36,20 +44,18 @@ export default {
         <h2 v-else>IMMAGINE NON DISPONIBILE</h2>
         <!-- Titolo -->
         <div class="card-body">
-            <h5 v-if="titoloFilm" class="card-title">{{ titoloFilm }}</h5>
-            <h5 v-else class="card-title">{{ film.name }}</h5>
+            <h5 class="card-title">{{ titoloFilm }}</h5>
             <!-- Controllo che il titolo originale e il titolo non coincidano -->
-            <div v-if="titoloOriginale !== titoloFilm || film.name !== film.original_name">
-                <p v-if="titoloOriginale" class="card-text">{{ titoloOriginale }}</p>
-                <p v-else>{{ film.original_name }}</p>
-            </div>
+            <p v-if="titoloOriginale !== titoloFilm" class="card-text">{{ titoloOriginale }}</p>
         </div>
         <!-- Info -->
+        <!-- Lingua -->
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <lang-flag v-if="this.countryList.includes(lingua)" :iso="lingua" :squared="false" :title=lingua />
                 <div v-else>{{ lingua }}</div>
             </li>
+            <!-- Valutazione -->
             <li class=" list-group-item valutazione">
                 <ul>
                     <li v-for="n in 5">
