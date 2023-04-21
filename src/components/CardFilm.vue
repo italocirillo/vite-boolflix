@@ -1,10 +1,11 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
+import flag from 'vue-lang-code-flags/relation';
 export default {
     name: "Card",
     data() {
         return {
-            countryList: ["am", "ar", "az", "bn", "be", "cact", "cs", "de", "el", "en", "es", "et", "fa", "fr", "bg", "ha", "hi", "hu", "hy", "it", "id", "ja", "jv", "km", "ko", "lv", "mr", "ms", "nl", "pl", "pt", "ro", "ru", "sw", "ta", "te", "th", "tr", "uk", "uz", "vi", "zh"]
+            flag
         }
     },
     computed: {
@@ -52,7 +53,7 @@ export default {
         <!-- Lingua -->
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <lang-flag v-if="this.countryList.includes(lingua)" :iso="lingua" :squared="false" :title=lingua />
+                <lang-flag v-if="Object.keys(this.flag).includes(lingua)" :iso="lingua" :squared="false" :title=lingua />
                 <div v-else>{{ lingua }}</div>
             </li>
             <!-- Valutazione -->
