@@ -13,6 +13,7 @@ export default {
   },
 
   methods: {
+
     ottieniFilm(ricercaCategoria) {
       this.store.loading = true;
       const params = {
@@ -38,6 +39,7 @@ export default {
         this.store.loading = false;
       })
     },
+
     eseguiRicerca() {
       this.ottieniFilm("movie");
       this.ottieniFilm("tv");
