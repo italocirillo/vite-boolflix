@@ -5,6 +5,7 @@ export const store = reactive({
     catalogoSerie: [],
     apiUrl: "https://api.themoviedb.org/3/search/",
     loading: false,
+    barraRicerca: false,
     filmDaCercare: "",
     filtroFilm: true,
     filtroSerie: true,

@@ -41,16 +41,22 @@ export default {
     },
 
     eseguiRicerca() {
+      this.store.barraRicerca = !this.store.barraRicerca;
       this.ottieniFilm("movie");
       this.ottieniFilm("tv");
       this.store.filmDaCercare = "";
+    },
+
+
+    ottieniGeneri() {
+
     }
   }
 }
 
 </script>
 <template>
-  <AppHeader @cerca="eseguiRicerca" />
+  <AppHeader @cerca="eseguiRicerca" @ottieniGeneri="ottieniGeneri" />
   <AppMain />
 </template>
 

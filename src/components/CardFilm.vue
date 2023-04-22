@@ -1,6 +1,6 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
-import flag from 'vue-lang-code-flags/relation';
+import flag from '../../node_modules/vue-lang-code-flags';
 export default {
     name: "Card",
     data() {

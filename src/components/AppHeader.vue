@@ -1,17 +1,25 @@
 <script>
 import { store } from '../store';
 import Ricerca from './Ricerca.vue';
-import * as bootstrap from 'bootstrap';
+import SelettoreGenere from './SelettoreGenere.vue';
+import * as bootstrap from '../../node_modules/bootstrap';
 
 
 export default {
     name: "AppHeader",
-    components: { Ricerca },
+    components: { Ricerca, SelettoreGenere },
     data() {
         return {
-            barraRicerca: false,
             bootstrap,
             store
+        }
+    },
+    computed: {
+        filtroFilm() {
+            return this.store.filtroFilm;
+        },
+        filtroSerie() {
+            return this.store.filtroSerie;
         }
     }
 }
@@ -34,24 +42,28 @@ export default {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item" @click="this.store.filtroSerie = true; this.store.filtroFilm = true">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item" @click=" this.store.filtroSerie = true; this.store.filtroFilm = false ">
-                                <a class="nav-link" href="#">Serie tv</a>
+                                <a class="nav-link" aria-current="page" href="#"
+                                    :class=" filtroFilm === true && filtroSerie === true ? 'active' : '' ">TUTTI</a>
                             </li>
                             <li class="nav-item" @click=" this.store.filtroFilm = true; this.store.filtroSerie = false; ">
-                                <a class="nav-link" href="#">Film</a>
+                                <a class="nav-link" href="#"
+                                    :class=" filtroFilm === true && filtroSerie === false ? 'active' : '' ">Film</a>
+                            </li>
+                            <li class="nav-item" @click=" this.store.filtroSerie = true; this.store.filtroFilm = false ">
+                                <a class="nav-link" href="#"
+                                    :class=" filtroSerie === true && filtroFilm === false ? 'active' : '' ">Serie tv</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
-        <div class="ricerca col-4">
+        <div class="selettore col-2">
+            <SelettoreGenere @ottieniGeneri=" $('ottieniGeneri') " />
+        </div>
+        <div class="ricerca col-3">
             <!-- RICERCA -->
-            <i v-if=" barraRicerca === false " class="fa-solid fa-magnifying-glass"
-                @click=" this.barraRicerca = !this.barraRicerca "></i>
-            <Ricerca @cerca=" $emit('cerca') " v-else />
+            <Ricerca @cerca=" $emit('cerca') " />
         </div>
         <div class="sezione-destra col-2">
             <!-- Nav -->

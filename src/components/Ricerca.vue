@@ -13,7 +13,9 @@ export default {
 
 <template>
     <form @submit.prevent="">
-        <div class=" input-group">
+        <i v-if="this.store.barraRicerca === false" class="fa-solid fa-magnifying-glass px-2 fs-3"
+            @click="this.store.barraRicerca = !this.store.barraRicerca"></i>
+        <div v-else class=" input-group">
             <input type="search" class="form-control" placeholder="Ricerca film" aria-label="Ricerca"
                 aria-describedby="basic-addon1" v-model.trim="this.store.filmDaCercare">
             <button @click="$emit('cerca')" class="input-group-text" id="basic-addon1"><i

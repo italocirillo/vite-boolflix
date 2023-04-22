@@ -70,6 +70,6 @@ export default {
 }
 
 .container {
-    padding-top: 8em;
+    padding-top: 10em;
 }
 </style>
