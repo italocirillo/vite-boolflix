@@ -64,7 +64,7 @@ export default {
                 <li class="list-group-item">
                     <lang-flag v-if="Object.keys(this.flag).includes(lingua)" :iso="lingua" :squared="false"
                         :title=lingua />
-                    <div v-else>{{ lingua }}</div>
+                    <p v-else class="text-light">{{ lingua }}</p>
                 </li>
                 <!-- Valutazione -->
                 <li class=" list-group-item valutazione">

@@ -1,6 +1,8 @@
 <script>
+import { store } from '../store';
 import Ricerca from './Ricerca.vue';
-import * as bootstrap from 'bootstrap'
+import * as bootstrap from 'bootstrap';
+
 
 export default {
     name: "AppHeader",
@@ -8,7 +10,8 @@ export default {
     data() {
         return {
             barraRicerca: false,
-            bootstrap
+            bootstrap,
+            store
         }
     }
 }
@@ -30,13 +33,13 @@ export default {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
+                            <li class="nav-item" @click="this.store.filtroSerie = true; this.store.filtroFilm = true">
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click=" this.store.filtroSerie = true; this.store.filtroFilm = false ">
                                 <a class="nav-link" href="#">Serie tv</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" @click=" this.store.filtroFilm = true; this.store.filtroSerie = false; ">
                                 <a class="nav-link" href="#">Film</a>
                             </li>
                         </ul>
@@ -46,9 +49,9 @@ export default {
         </div>
         <div class="ricerca col-4">
             <!-- RICERCA -->
-            <i v-if="barraRicerca === false" class="fa-solid fa-magnifying-glass"
-                @click="this.barraRicerca = !this.barraRicerca"></i>
-            <Ricerca @cerca="$emit('cerca')" v-else />
+            <i v-if=" barraRicerca === false " class="fa-solid fa-magnifying-glass"
+                @click=" this.barraRicerca = !this.barraRicerca "></i>
+            <Ricerca @cerca=" $emit('cerca') " v-else />
         </div>
         <div class="sezione-destra col-2">
             <!-- Nav -->

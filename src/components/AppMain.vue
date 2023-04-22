@@ -15,8 +15,7 @@ export default {
         },
         catalogoSerie() {
             return this.store.catalogoSerie;
-        }
-
+        },
     },
     emits: ["cerca"],
     components: { CardFilm },
@@ -35,7 +34,7 @@ export default {
 
         <div v-else class="container">
             <!-- FILM -->
-            <div>
+            <div v-if="this.store.filtroFilm">
                 <h2 v-if="catalogoFilm.length > 0" class="text-start p-3">FILM Trovati: {{
                     catalogoFilm.length
                 }}</h2>
@@ -46,7 +45,7 @@ export default {
                 </div>
             </div>
             <!-- SERIE TV  -->
-            <div>
+            <div v-if="this.store.filtroSerie">
                 <h2 v-if="catalogoSerie.length > 0" class="text-start p-3">SERIE Trovate: {{
                     catalogoSerie.length
                 }}</h2>
