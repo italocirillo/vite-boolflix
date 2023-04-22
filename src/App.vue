@@ -49,7 +49,7 @@ export default {
 
 
     ottieniGeneri() {
-
+      console.log("generi");
     }
   }
 }

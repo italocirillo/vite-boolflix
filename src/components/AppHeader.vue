@@ -59,7 +59,7 @@ export default {
             </nav>
         </div>
         <div class="selettore col-2">
-            <SelettoreGenere @ottieniGeneri=" $('ottieniGeneri') " />
+            <SelettoreGenere @ottieniGeneri=" $emit('ottieniGeneri') " />
         </div>
         <div class="ricerca col-3">
             <!-- RICERCA -->
