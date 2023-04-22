@@ -44,7 +44,7 @@ export default {
                 </div>
             </nav>
         </div>
-        <div class="ricerca col-5">
+        <div class="ricerca col-4">
             <!-- RICERCA -->
             <i v-if="barraRicerca === false" class="fa-solid fa-magnifying-glass"
                 @click="this.barraRicerca = !this.barraRicerca"></i>
@@ -78,6 +78,9 @@ export default {
 
 <style lang="scss" scoped>
 header {
+    position: fixed;
+    z-index: 10;
+    background-color: rgba($color: #1b1b1b, $alpha: 0.8);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -98,6 +101,10 @@ header {
     .ricerca {
         text-align: end;
         cursor: pointer;
+
+        i {
+            font-size: 2rem;
+        }
     }
 
     .sezione-sinistra {

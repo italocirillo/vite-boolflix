@@ -32,7 +32,7 @@ export default {
     <div v-else class="container">
         <!-- FILM -->
         <div>
-            <h2 v-if="catalogoFilm.length > 0" class="text-center p-3">FILM Trovati: {{
+            <h2 v-if="catalogoFilm.length > 0" class="text-start p-3">FILM Trovati: {{
                 catalogoFilm.length
             }}</h2>
             <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
@@ -43,7 +43,7 @@ export default {
         </div>
         <!-- SERIE TV  -->
         <div>
-            <h2 v-if="catalogoSerie.length > 0" class="text-center p-3">SERIE Trovate: {{
+            <h2 v-if="catalogoSerie.length > 0" class="text-start p-3">SERIE Trovate: {{
                 catalogoSerie.length
             }}</h2>
             <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
@@ -55,4 +55,8 @@ export default {
     </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.container {
+    padding-top: 8em;
+}
+</style>
