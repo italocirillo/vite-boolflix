@@ -8,6 +8,7 @@ import * as bootstrap from '../../node_modules/bootstrap';
 export default {
     name: "AppHeader",
     components: { Ricerca, SelettoreGenere },
+    emits: ["cerca", "ottieniGeneriFilm", "ottieniGeneriSerie"],
     data() {
         return {
             bootstrap,
@@ -59,7 +60,8 @@ export default {
             </nav>
         </div>
         <div class="selettore col-2">
-            <SelettoreGenere @ottieniGeneri=" $emit('ottieniGeneri') " />
+            <SelettoreGenere @ottieniGeneriFilm=" $emit('ottieniGeneriFilm') "
+                @ottieniGeneriSerie=" $emit('ottieniGeneriSerie') " />
         </div>
         <div class="ricerca col-3">
             <!-- RICERCA -->

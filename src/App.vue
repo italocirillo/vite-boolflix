@@ -6,6 +6,7 @@ import { store } from "./store";
 
 export default {
   components: { AppHeader, AppMain },
+  emits: ["cerca,ottienGeneriFilm,ottieniGeneriSerie"],
   data() {
     return {
       store
@@ -13,7 +14,7 @@ export default {
   },
 
   methods: {
-
+    // Ottieni Film
     ottieniFilm(ricercaCategoria) {
       this.store.loading = true;
       const params = {
@@ -22,7 +23,7 @@ export default {
       };
       params.query = this.store.filmDaCercare;
       // Chiamata axios
-      axios.get(this.store.apiUrl + ricercaCategoria, {
+      axios.get(this.store.apiUrl + "search/" + ricercaCategoria, {
         params
       }).then((resp) => {
         // Scelta tra movie e serie
@@ -40,6 +41,7 @@ export default {
       })
     },
 
+    // Cerca Film
     eseguiRicerca() {
       this.store.barraRicerca = !this.store.barraRicerca;
       this.ottieniFilm("movie");
@@ -47,16 +49,36 @@ export default {
       this.store.filmDaCercare = "";
     },
 
+    // Ottieni Generi
 
-    ottieniGeneri() {
-      console.log("generi");
+    ottieniGenereCategoria(categoria) {
+      this.store.loading = true;
+      const params = {
+        api_key: "98f46d7d18a354762b374158a8da360e",
+        language: "it-IT"
+      }
+      axios.get(this.store.apiUrl + `/genre/${categoria}/list`, {
+        params
+      }).then((resp) => {
+        console.log(resp.data.genres);
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.store.loading = false;
+      })
+    },
+    ottieniGeneriFilm() {
+      this.ottieniGenereCategoria("movie");
+    },
+    ottieniGeneriSerie() {
+      this.ottieniGenereCategoria("tv");
     }
   }
 }
 
 </script>
 <template>
-  <AppHeader @cerca="eseguiRicerca" @ottieniGeneri="ottieniGeneri" />
+  <AppHeader @cerca="eseguiRicerca" @ottieniGeneriFilm="ottieniGeneriFilm" @ottieniGeneriSerie="ottieniGeneriSerie" />
   <AppMain />
 </template>
 
