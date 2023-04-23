@@ -34,7 +34,13 @@ export default {
         },
         descrizione() {
             return this.film.overview;
-        }
+        },
+        listaGeneriFilmSelezionato() {
+            return this.store.listaGeneriFilmSelezionato;
+        },
+        listaAttoriFilmSelezionato() {
+            return this.store.listaAttoriFilmSelezionato;
+        },
     },
     props: {
         film: Object,
@@ -86,9 +92,23 @@ export default {
                     aria-expanded="false">
                     <span>Maggiori info <i class="fa-solid fa-circle-info"></i></span>
                 </button>
-                <ul class="dropdown-menu">
-
-                </ul>
+                <div class="dropdown-menu">
+                    <div>
+                        <strong>generi: </strong>
+                        <ul>
+                            <li v-for="( genere, index ) in  listaGeneriFilmSelezionato  " :key=" index " class="info-lista">
+                                {{ genere }},</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>attori: </strong>
+                        <ul>
+                            <li v-for="( attori, index ) in  listaAttoriFilmSelezionato  " :key=" index " class="info-lista">
+                                {{ attori }},
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -164,6 +184,28 @@ export default {
             font-size: 0.7rem;
             background-color: rgba($color: #a5a3a3, $alpha: 0.5);
             padding: 0em;
+        }
+
+        .dropdown-menu {
+
+            strong {
+                text-transform: uppercase;
+                display: inline-block;
+                font-size: 0.6rem;
+                padding: 0;
+            }
+
+            ul {
+                list-style: none;
+                list-style-type: none;
+                display: inline;
+                padding: 0;
+
+                li {
+                    display: inline-block;
+                    font-size: 0.6rem;
+                }
+            }
         }
     }
 

@@ -86,11 +86,39 @@ export default {
         api_key: "98f46d7d18a354762b374158a8da360e",
         language: "it-IT",
       };
-      // Chiamata axios
+
+      // Chiamata axios Generi
       axios.get(this.store.apiUrl + `${categoria}/` + `${id}`, {
         params
       }).then((resp) => {
-        console.log(resp.data.genres);
+        this.store.listaGeneriFilmSelezionato.length = 0;
+        for (let i = 0; i < 5; i++) {
+          this.store.listaGeneriFilmSelezionato.push(resp.data.genres[i].name);
+          if (i === resp.data.genres.length - 1) {
+            i = 5;
+          }
+        }
+      }).catch((error) => {
+        console.log(error);
+      })
+
+      // Chiamata axios Cast
+      axios.get(this.store.apiUrl + `${categoria}/` + `${id}` + '/credits', {
+        params
+      }).then((resp) => {
+        let attori = 0;
+        let i = 0;
+        this.store.listaAttoriFilmSelezionato.length = 0;
+        while (attori < 5) {
+          if (resp.data.cast[i].known_for_department === "Acting") {
+            this.store.listaAttoriFilmSelezionato.push(resp.data.cast[i].name);
+            attori++;
+          }
+          if (i === resp.data.cast.length - 1) {
+            attori = 5;
+          }
+          i++;
+        }
       }).catch((error) => {
         console.log(error);
       })

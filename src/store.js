@@ -12,4 +12,6 @@ export const store = reactive({
     genereFilmSelezionato: 1,
     genereSerieSelezionato: 1,
     idSelezionato: 0,
+    listaGeneriFilmSelezionato: [],
+    listaAttoriFilmSelezionato: [],
 });
