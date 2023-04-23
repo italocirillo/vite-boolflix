@@ -16,6 +16,12 @@ export default {
         catalogoSerie() {
             return this.store.catalogoSerie;
         },
+        genereFilmSelezionato() {
+            return this.store.genereFilmSelezionato;
+        },
+        genereSerieSelezionato() {
+            return this.store.genereSerieSelezionato;
+        }
     },
     emits: ["cerca"],
     components: { CardFilm },
@@ -35,24 +41,26 @@ export default {
         <div v-else class="container">
             <!-- FILM -->
             <div v-if="this.store.filtroFilm">
-                <h2 v-if="catalogoFilm.length > 0" class="text-start p-3">FILM Trovati: {{
-                    catalogoFilm.length
-                }}</h2>
+                <h2 v-if="catalogoFilm.length > 0" class="text-start p-3">FILM Trovati:</h2>
                 <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
-                    <div class="col p-1" v-for="film in catalogoFilm" :key="film.id">
-                        <CardFilm :film="film" />
-                    </div>
+                    <template v-for="film in catalogoFilm" :key="film.id">
+                        <div class="col p-1"
+                            v-if="film.genre_ids.includes(genereFilmSelezionato) || (genereFilmSelezionato === 1)">
+                            <CardFilm :film="film" />
+                        </div>
+                    </template>
                 </div>
             </div>
             <!-- SERIE TV  -->
             <div v-if="this.store.filtroSerie">
-                <h2 v-if="catalogoSerie.length > 0" class="text-start p-3">SERIE Trovate: {{
-                    catalogoSerie.length
-                }}</h2>
+                <h2 v-if="catalogoSerie.length > 0" class="text-start p-3">SERIE Trovate:</h2>
                 <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
-                    <div class="col p-1" v-for="film in catalogoSerie" :key="film.id">
-                        <CardFilm :film="film" />
-                    </div>
+                    <template v-for="film in catalogoSerie" :key="film.id">
+                        <div class="col p-1"
+                            v-if="film.genre_ids.includes(genereSerieSelezionato) || (genereSerieSelezionato === 1)">
+                            <CardFilm :film="film" />
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>

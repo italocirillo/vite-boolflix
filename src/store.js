@@ -9,4 +9,6 @@ export const store = reactive({
     filmDaCercare: "",
     filtroFilm: true,
     filtroSerie: true,
+    genereFilmSelezionato: 1,
+    genereSerieSelezionato: 1,
 });

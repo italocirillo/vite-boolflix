@@ -6,13 +6,18 @@ import { store } from "./store";
 
 export default {
   components: { AppHeader, AppMain },
-  emits: ["cerca,ottienGeneriFilm,ottieniGeneriSerie"],
+  emits: ["cerca"],
   data() {
     return {
       store
     }
   },
 
+  mounted() {
+    // Ottieni Generi
+    this.ottieniGenereCategoria("movie");
+    this.ottieniGenereCategoria("tv");
+  },
   methods: {
     // Ottieni Film
     ottieniFilm(ricercaCategoria) {
@@ -50,7 +55,6 @@ export default {
     },
 
     // Ottieni Generi
-
     ottieniGenereCategoria(categoria) {
       this.store.loading = true;
       const params = {
@@ -60,25 +64,23 @@ export default {
       axios.get(this.store.apiUrl + `/genre/${categoria}/list`, {
         params
       }).then((resp) => {
-        console.log(resp.data.genres);
+        if (categoria === "movie") {
+          this.store.generiFilm = resp.data.genres;
+        } else if (categoria === "tv") {
+          this.store.generiSerie = resp.data.genres;
+        }
       }).catch((error) => {
         console.log(error);
       }).finally(() => {
         this.store.loading = false;
       })
     },
-    ottieniGeneriFilm() {
-      this.ottieniGenereCategoria("movie");
-    },
-    ottieniGeneriSerie() {
-      this.ottieniGenereCategoria("tv");
-    }
   }
 }
 
 </script>
 <template>
-  <AppHeader @cerca="eseguiRicerca" @ottieniGeneriFilm="ottieniGeneriFilm" @ottieniGeneriSerie="ottieniGeneriSerie" />
+  <AppHeader @cerca="eseguiRicerca" />
   <AppMain />
 </template>
 

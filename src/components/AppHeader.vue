@@ -2,13 +2,13 @@
 import { store } from '../store';
 import Ricerca from './Ricerca.vue';
 import SelettoreGenere from './SelettoreGenere.vue';
-import * as bootstrap from '../../node_modules/bootstrap';
+import * as bootstrap from 'bootstrap';
 
 
 export default {
     name: "AppHeader",
     components: { Ricerca, SelettoreGenere },
-    emits: ["cerca", "ottieniGeneriFilm", "ottieniGeneriSerie"],
+    emits: ["cerca",],
     data() {
         return {
             bootstrap,
@@ -60,8 +60,7 @@ export default {
             </nav>
         </div>
         <div class="selettore col-2">
-            <SelettoreGenere @ottieniGeneriFilm=" $emit('ottieniGeneriFilm') "
-                @ottieniGeneriSerie=" $emit('ottieniGeneriSerie') " />
+            <SelettoreGenere />
         </div>
         <div class="ricerca col-3">
             <!-- RICERCA -->

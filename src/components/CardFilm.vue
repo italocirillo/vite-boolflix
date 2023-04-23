@@ -1,6 +1,6 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
-import flag from '../../node_modules/vue-lang-code-flags';
+import flag from 'vue-lang-code-flags/relation';
 export default {
     name: "Card",
     data() {
@@ -114,24 +114,24 @@ export default {
         top: 0;
         right: 0;
         opacity: 0%;
-        transition: 2s;
+        transition: 1s;
 
         .card-body {
             text-align: center;
             overflow-y: auto;
             color: black;
-            background-color: rgba($color: #f9f9f9, $alpha: 0.3);
+            background-color: rgba($color: #f9f9f9, $alpha: 0.8);
 
             h4 {
                 text-transform: uppercase;
                 font-size: 1rem;
                 font-weight: 900;
-                color: #f9f9f9;
+                color: rgb(39, 38, 38);
             }
 
             h5 {
                 text-transform: uppercase;
-                color: rgb(39, 38, 38);
+                color: #f9f9f9;
                 font-size: 0.5rem;
             }
 
@@ -148,13 +148,13 @@ export default {
     }
 
     .immagine-poster {
-        transition: 0.5s;
+        transition: 0.25s;
     }
 
 }
 
 .card:hover {
-    animation: capovolgi 1s linear;
+    animation: capovolgi 0.5s linear;
 
     .informazioni-film {
         opacity: 100%;
