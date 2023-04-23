@@ -11,4 +11,5 @@ export const store = reactive({
     filtroSerie: true,
     genereFilmSelezionato: 1,
     genereSerieSelezionato: 1,
+    idSelezionato: 0,
 });

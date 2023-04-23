@@ -1,11 +1,14 @@
 <script>
 import LangFlag from 'vue-lang-code-flags';
 import flag from 'vue-lang-code-flags/relation';
+import { store } from '../store';
 export default {
     name: "Card",
+    emits: ["richiediInfo"],
     data() {
         return {
-            flag
+            store,
+            flag,
         }
     },
     computed: {
@@ -76,6 +79,17 @@ export default {
                     </ul>
                 </li>
             </ul>
+            <!-- Maggiori info -->
+            <div class="dropdown" @click="this.store.idSelezionato = this.film.id;
+            this.$emit('richiediInfo');">
+                <button class="btn btn-secondary dropdown-toggle info" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <span>Maggiori info <i class="fa-solid fa-circle-info"></i></span>
+                </button>
+                <ul class="dropdown-menu">
+
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -144,6 +158,12 @@ export default {
         .list-group-item {
             background-color: #1b1b1b;
             padding: 0em 1em;
+        }
+
+        .info {
+            font-size: 0.7rem;
+            background-color: rgba($color: #a5a3a3, $alpha: 0.5);
+            padding: 0em;
         }
     }
 

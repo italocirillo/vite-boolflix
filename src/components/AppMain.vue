@@ -4,6 +4,7 @@ import CardFilm from './CardFilm.vue';
 
 export default {
     name: "AppMain",
+    emits: ["cerca", "richiediInfoFilm", "richiediInfoSerie"],
     data() {
         return {
             store
@@ -21,9 +22,8 @@ export default {
         },
         genereSerieSelezionato() {
             return this.store.genereSerieSelezionato;
-        }
+        },
     },
-    emits: ["cerca"],
     components: { CardFilm },
 }
 </script>
@@ -43,10 +43,10 @@ export default {
             <div v-if="this.store.filtroFilm">
                 <h2 v-if="catalogoFilm.length > 0" class="text-start p-3">FILM Trovati:</h2>
                 <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
-                    <template v-for="film in catalogoFilm" :key="film.id">
+                    <template v-for="film in    catalogoFilm   " :key="film.id">
                         <div class="col p-1"
                             v-if="film.genre_ids.includes(genereFilmSelezionato) || (genereFilmSelezionato === 1)">
-                            <CardFilm :film="film" />
+                            <CardFilm :film="film" @richiediInfo="$emit('richiediInfoFilm')" />
                         </div>
                     </template>
                 </div>
@@ -55,10 +55,10 @@ export default {
             <div v-if="this.store.filtroSerie">
                 <h2 v-if="catalogoSerie.length > 0" class="text-start p-3">SERIE Trovate:</h2>
                 <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-1 g-3">
-                    <template v-for="film in catalogoSerie" :key="film.id">
+                    <template v-for="   film    in     catalogoSerie    " :key="film.id">
                         <div class="col p-1"
                             v-if="film.genre_ids.includes(genereSerieSelezionato) || (genereSerieSelezionato === 1)">
-                            <CardFilm :film="film" />
+                            <CardFilm :film="film" @richiediInfo="$emit('richiediInfoSerie')" />
                         </div>
                     </template>
                 </div>

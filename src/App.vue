@@ -6,13 +6,17 @@ import { store } from "./store";
 
 export default {
   components: { AppHeader, AppMain },
-  emits: ["cerca"],
+  emits: ["cerca", "richiediInfoFilm", "richiediInfoSerie"],
   data() {
     return {
       store
     }
   },
-
+  computed: {
+    idSelezionato() {
+      return this.store.idSelezionato;
+    }
+  },
   mounted() {
     // Ottieni Generi
     this.ottieniGenereCategoria("movie");
@@ -75,13 +79,30 @@ export default {
         this.store.loading = false;
       })
     },
+
+    //RichiediInfo
+    richiediInfo(categoria, id) {
+      const params = {
+        api_key: "98f46d7d18a354762b374158a8da360e",
+        language: "it-IT",
+      };
+      // Chiamata axios
+      axios.get(this.store.apiUrl + `${categoria}/` + `${id}`, {
+        params
+      }).then((resp) => {
+        console.log(resp.data.genres);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
   }
 }
 
 </script>
 <template>
   <AppHeader @cerca="eseguiRicerca" />
-  <AppMain />
+  <AppMain @richiediInfoFilm="richiediInfo('movie', idSelezionato)"
+    @richiediInfoSerie="richiediInfo('tv', idSelezionato)" />
 </template>
 
 <style lang="scss">
